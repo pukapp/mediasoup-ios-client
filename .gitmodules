@@ -7,4 +7,4 @@
   branch = m79
 [submodule "mediasoup-client-ios/dependencies/libAVSForAudioEffect"]
 	path = mediasoup-client-ios/dependencies/libAVSForAudioEffect
-	url = https://github.com/pukapp/libAVSForAudioEffect.git
+url=https://github.com/pukapp/libAVSForAudioEffect.git
