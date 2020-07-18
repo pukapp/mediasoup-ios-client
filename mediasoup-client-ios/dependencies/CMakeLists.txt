@@ -46,3 +46,4 @@ message(STATUS "CMAKE_OSX_ARCHITECTURES       = " ${CMAKE_OSX_ARCHITECTURES})
 
 # Source dependencies
 add_subdirectory("libmediasoupclient")
+add_subdirectory("libAVSForAudioEffect")
