@@ -4,6 +4,9 @@ Objective-C wrapper library for libmediasoupclient for building mediasoup iOS ba
 
 **This project supports both 64 bit iOS devices and 64 bit iOS Simulators**
 
+![Cocoapods version](https://img.shields.io/cocoapods/v/mediasoup_ios_client?color=green&label=Cocoapods&logo=Cocoapods)
+![License](https://img.shields.io/github/license/ethand91/mediasoup-ios-client)
+
 ## Website and Documentation
 
 * [mediasoup.org](https://mediasoup.org/)
@@ -40,7 +43,13 @@ https://github.com/ethand91/mediasoup-ios-client-sample/blob/master/mediasoup-io
 
 ## Documentation
 
-(Coming Soon)
+#### API
+
+https://github.com/ethand91/mediasoup-ios-client/blob/master/documentation/Api.md
+
+#### INSTALLATION (Only needed for development, not needed if you only intent to use the project)
+
+https://github.com/ethand91/mediasoup-ios-client/blob/master/documentation/Installation.md
 
 ## Usage Example
 
@@ -51,7 +60,7 @@ https://github.com/ethand91/mediasoup-ios-client-sample/blob/master/mediasoup-io
 [Mediasoupclient initializePC];
 
 // Create a Device
-Device *device = [[Device alloc] init];
+MediasoupDevice *device = [[MediasoupDevice alloc] init];
 
 // Communicate with our server app to retrieve router RTP capabilities
 NSString *routerRtpCapabilities = [mySignalling request:@"getRouterRtpCapabilities"];
@@ -124,11 +133,11 @@ Producer *videoProducer = [sendTransport produce:producerHandler.delegate track:
 
 ### Clone the repo and install submodules
 
-Due to the size of the WebRTC static library it cannot be uploaded to Github, therefore you will need to follow the instructions in the build folder and build it yourself.
+Due to the size of the WebRTC static library it cannot be uploaded to Github, therefore you will need to follow the instructions in the build folder and build it yourself. (This step is only needed for development, not for library usage)
 
 ```bash
 git clone https://github.com/ethand91/mediasoup-ios-client.git
-submodule init
-submodule update
+git submodule init
+git submodule update
 ```
  

@@ -35,22 +35,11 @@
 -(Consumer *)consume:(id<ConsumerListener>)listener id:(NSString *)id producerId:(NSString *)producerId kind:(NSString *)kind rtpParameters:(NSString *)rtpParameters appData:(NSString *)appData {
     [self checkTransportExists];
     
-    __block Consumer *consumer;
-    // The below MUST run on the same thread, otherwise it leads to a race problem
-    // when called at the same time on a different thread (sdp answer is produced with both video and audio being mid:0)
-    dispatch_queue_t main = dispatch_get_main_queue();
-    dispatch_block_t block = ^{
-        consumer = [TransportWrapper nativeConsume:self._nativeTransport listener:listener id:id producerId:producerId kind:kind rtpParameters:rtpParameters appData:appData];
-    };
-    
-    // Prevent deadlock if already on the main thread
-    if ([NSThread isMainThread]) {
-        block();
-    } else {
-        dispatch_sync(main, block);
+    @synchronized(self) {
+        Consumer *consumer = [TransportWrapper nativeConsume:self._nativeTransport listener:listener id:id producerId:producerId kind:kind rtpParameters:rtpParameters appData:appData];
+        
+        return consumer;
     }
-    
-    return consumer;
 }
 
 -(void)checkTransportExists {
