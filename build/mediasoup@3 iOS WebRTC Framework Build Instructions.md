@@ -87,3 +87,23 @@ lipo -create build/libmediasoupclient/libsdptransform/libsdptransform.a build_86
 Once build include the libwebrtc.a, libmediasoup.a, libsdptransform.a in the project
 
 
+
+
+
+
+///本机编译，注意webrtc引用的地址需要替换成对应路径
+
+cmake . -Bbuild -DLIBWEBRTC_INCLUDE_PATH=/Users/lco/Desktop/webrtc-checkout/src -DLIBWEBRTC_BINARY_PATH=/Users/lco/Desktop/webrtc-checkout/src/out_ios_libs/universal -DMEDIASOUP_LOG_TRACE=ON -DMEDIASOUP_LOG_DEV=ON -DCMAKE_CXX_FLAGS="-fvisibility=hidden" -DLIBSDPTRANSFORM_BUILD_TESTS=OFF -DIOS_SDK=iphone -DIOS_ARCHS="arm64"
+
+make -C build
+
+cmake . -Bbuild_86_64 -DLIBWEBRTC_INCLUDE_PATH=/Users/lco/Desktop/webrtc-checkout/src -DLIBWEBRTC_BINARY_PATH=/Users/lco/Desktop/webrtc-checkout/src/out_ios_libs/universal -DMEDIASOUP_LOG_TRACE=ON -DMEDIASOUP_LOG_DEV=ON -DCMAKE_CXX_FLAGS="-fvisibility=hidden" -DLIBSDPTRANSFORM_BUILD_TESTS=OFF -DIOS_SDK=iphonesimulator -DIOS_ARCHS="x86_64"
+
+make -C build_86_64
+
+//合并真机和模拟器
+lipo -create build/libAVSForAudioEffect/libAVSForAudioEffect.a build_86_64/libAVSForAudioEffect/libAVSForAudioEffect.a -output lib/libAVSForAudioEffect.a
+
+
+lipo -create /Users/lco/Library/Developer/Xcode/DerivedData/Build/Products/Release-iphoneos/mediasoup_client_ios.framework/mediasoup_client_ios /Users/lco/Library/Developer/Xcode/DerivedData/Build/Products/Release-iphonesimulator/mediasoup_client_ios.framework/mediasoup_client_ios -output /Users/lco/Desktop/mediasoup_client_ios.framework/mediasoup_client_ios
+
